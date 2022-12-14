@@ -95,6 +95,7 @@ const endGame = (reason) =>{
   rankUser() 
   //refreshGame-Object() //Inside not just rank user, refresh all word stats to 0.
   showRanking()
+  actualLetter = -1
 };
 
 const rankUser = () => {

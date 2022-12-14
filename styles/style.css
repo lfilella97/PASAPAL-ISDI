@@ -69,7 +69,7 @@ main{
 .menu-button{
     cursor: pointer;
     padding: 5px 15px;
-    margin: 15px 100px;
+    margin: 15px 15px;
     background-color: black;
     color: white;
     border-radius: 15px;
@@ -155,18 +155,21 @@ main{
 .red{
     background-color: crimson;
 }
+
 .green{
     background-color: lawngreen;
 }
+
 .rankingMenu{
     background-color: rgba(0, 149, 22, 0.952);
     padding: 30px;
-    border: 2px solid black
-}
-.ranking{
-margin: 0px
+    border: 2px solid black;
+};
 
-}
+.ranking{
+margin: 0px;
+};
+
 .user1{
     margin-bottom:30px;
-}
+};
