@@ -1,0 +1,172 @@
+html{
+    width: 100%;
+    height: 100%;
+}
+body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #353535;
+}
+header{
+    height: 10%;
+    position: sticky;
+    top: 0;
+    display: flex;
+    background-color: rgb(0, 0, 0);
+    justify-content: space-between;
+}
+.title-countdown{
+    margin:0;
+    display: flex;
+    color: white;
+    font-size: 190%;
+    align-items: center;
+    padding-right: 75px;
+}
+.logo{
+    width: auto;
+    height: 100%;
+}
+main{
+    min-height: 400px;
+    min-width: none;
+    padding: 40px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.rulo{
+    height: 80%;
+    width: 80%;
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px; 
+}
+.main-content { 
+    grid-area: 2 / 2 / 8 / 7; 
+    justify-self:  center;
+    align-self: center;
+    font-size: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.menu{
+    min-height: 15rem;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.menu-button{
+    cursor: pointer;
+    padding: 5px 15px;
+    margin: 15px 100px;
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+    
+}
+
+.menu-button:hover{
+    box-shadow: 0px 0px 25px 0.1px black;
+}
+.user-input{
+    align-self: center;
+    height: 20px;
+    margin: 0px 100%;
+}
+.ready{
+    margin: 40px 300px;
+}
+.circle{
+    max-width:100px;
+    min-height: 50px;
+    box-shadow: 0px 0px 5px 5px rgb(20, 36, 51);
+    background-color: rgb(118, 133, 243);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 40px;
+}
+.circle:hover{
+    background-color: rgb(0, 78, 151);;
+}
+
+.div1 { grid-area: 1 / 1 / 2 / 2; }
+.div2 { grid-area: 1 / 2 / 2 / 3; }
+.div3 { grid-area: 1 / 3 / 2 / 4; }
+.div4 { grid-area: 1 / 4 / 2 / 5; }
+.div5 { grid-area: 1 / 5 / 2 / 6; }
+.div6 { grid-area: 1 / 6 / 2 / 7; }
+.div7 { grid-area: 1 / 7 / 2 / 8; }
+.div8 { grid-area: 2 / 7 / 3 / 8; }
+.div9 { grid-area: 3 / 7 / 4 / 8; }
+.div10 { grid-area: 4 / 7 / 5 / 8; }
+.div11 { grid-area: 5 / 7 / 6 / 8; }
+.div12 { grid-area: 6 / 7 / 7 / 8; }
+.div13 { grid-area: 7 / 7 / 8 / 8; }
+.div14 { grid-area: 8 / 7 / 9 / 8; }
+.div15 { grid-area: 8 / 6 / 9 / 7; }
+.div16 { grid-area: 8 / 5 / 9 / 6; }
+.div17 { grid-area: 8 / 4 / 9 / 5; }
+.div18 { grid-area: 8 / 3 / 9 / 4; }
+.div19 { grid-area: 8 / 2 / 9 / 3; }
+.div20 { grid-area: 8 / 1 / 9 / 2; }
+.div21 { grid-area: 7 / 1 / 8 / 2; }
+.div22 { grid-area: 6 / 1 / 7 / 2; }
+.div23 { grid-area: 5 / 1 / 6 / 2; }
+.div24 { grid-area: 4 / 1 / 5 / 2; }
+.div25 { grid-area: 3 / 1 / 4 / 2; }
+.div26 { grid-area: 2 / 1 / 3 / 2; }
+
+.jugo{
+    display: flex;
+    margin: 20px 101px ;
+    min-width: 160px;
+    font-size: 15px;
+    align-items: center;
+    justify-content: center;
+}
+.the-input{
+    height: 20px;
+}
+.the-buttons{
+    min-width: 150px;
+    min-height: 30px;
+    background-color: black;
+    color: white;
+}
+.the-buttons:hover{
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.521);
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.521);
+}
+
+.red{
+    background-color: crimson;
+}
+.green{
+    background-color: lawngreen;
+}
+.rankingMenu{
+    background-color: rgba(0, 149, 22, 0.952);
+    padding: 30px;
+    border: 2px solid black
+}
+.ranking{
+margin: 0px
+
+}
+.user1{
+    margin-bottom:30px;
+}
