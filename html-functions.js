@@ -88,7 +88,7 @@ const showUserInput = () => {
     userInput.className="user-input"
     userSumit.className="menu-button"
     userDescription.innerHTML="Introduce tu usuario"
-    userInput.value="user"
+    userInput.value=""
   
     userSumit.innerHTML="ACEPTAR"
     screen.appendChild(userDescription)
