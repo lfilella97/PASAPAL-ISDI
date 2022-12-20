@@ -1,16 +1,19 @@
-const theQuestion = document.createElement("div")
-const userInput = document.createElement("input")
-const screen = document.querySelector(".main-content")
-const timer = document.querySelector(".title-countdown")
-const theInput = document.createElement("input")
-const sendButton =document.createElement("div")
-const passapalabraButton = document.createElement("div")
+
+import { questionPack, ranking } from "./gameObjects.js"
 
 const mainCountDown = 300
 let actualTime;
 let questions;
 let rulo;
 let actualLetter = -1
+let countDown;
+const theQuestion = document.createElement("div")
+const userInput = document.createElement("input")
+const screen = document.querySelector(".main-content")
+const timer = document.querySelector(".title-countdown")
+const theInput = document.createElement("input")
+const sendButton = document.createElement("div")
+const passapalabraButton = document.createElement("div")
 
 
 const showMenu = () => {
@@ -45,54 +48,6 @@ const showMenu = () => {
 
 };
   
-const createMenuButton = () => {
-
-    menuButton = document.createElement("p")
-    menuButton.className="menu-button menu-alone"
-    menuButton.innerHTML = "MENU PRINCIPAL"
-    screen.appendChild(menuButton)
-    menuButton.addEventListener("click",showMenu)
-
-}
-
-const showRanking = () => {
-   screen.innerHTML=""
-    createRanking()
-    resetGame()
-    createMenuButton()
-
-}
-
-const createRanking = () => {
-    const rankingMenu = document.createElement('div')
-    rankingMenu.className = "rankingMenu"
-       
-    for (let i = 0; i <= ranking.length-1; i++) {
-        const element = document.createElement('p');
-          
-        element.innerHTML = `|-(${ranking[i].user})  ${ranking[i].score}  (${ranking[i].timeUsed})-|`
-        element.className = "user"+(i+1) + " ranking";
-        rankingMenu.appendChild(element);
-    };
-    screen.appendChild(rankingMenu)
-};
-
-const resetGame = () => {
-    for (letters in questions){
-        questions[letters].status = 0
-    }
-}
-
-const showRules = () => {
-    screen.innerHTML= null
-    const rulesContainer = document.createElement("p")
-    rulesContainer.className = "rules"
-    rulesContainer.innerHTML = (`BIENVENIDO A PASAPAL-ISDI: <br><br> El objetivo principal del juego es adivinar la palabra que<br> se esconde detras de cada definición:
-    <br><br>-Cada acierto sumará un punto.<br>-Cada fallo restara dos puntos.<br>-Puedes pasar a la siguiente palabra sin responder y <br> dejarla para la segunda vuleta del rosco.<br>-El tiempo maximo de la partida són ${mainCountDown} segundos.`);
-    screen.appendChild(rulesContainer)
-    createMenuButton()
-}
-
 const showUserInput = () => {
     screen.innerHTML= null
     const userDescription = document.createElement("p")
@@ -131,14 +86,6 @@ const showStartGameButton = () => {
     createReNamePlayerButton()
     createMenuButton()
 };
-  
-const createReNamePlayerButton = () => {
-    const renamePlayerButton = document.createElement("p")
-    renamePlayerButton.className="menu-button menu-alone"
-    renamePlayerButton.innerHTML = "CAMBIAR NICK"
-    screen.appendChild(renamePlayerButton)
-    renamePlayerButton.addEventListener("click",showUserInput)
-};
 
 const startGameButtonPress = () => {
     
@@ -158,4 +105,254 @@ function createRosco() {
       };
       circleContainer.appendChild(element);
     };
+};
+
+const showRules = () => {
+    screen.innerHTML= null
+    const rulesContainer = document.createElement("p")
+    rulesContainer.className = "rules"
+    rulesContainer.innerHTML = (`BIENVENIDO A PASAPAL-ISDI: <br><br> El objetivo principal del juego es adivinar la palabra que<br> se esconde detras de cada definición:
+    <br><br>-Cada acierto sumará un punto.<br>-Cada fallo restara dos puntos.<br>-Puedes pasar a la siguiente palabra sin responder pulsando espacio y dejarla para la segunda vuleta del rosco.<br>-El tiempo maximo de la partida són ${mainCountDown} segundos.`);
+    screen.appendChild(rulesContainer)
+    createMenuButton()
+}
+
+const showRanking = () => {
+
+   screen.innerHTML=""
+    createRanking()
+    resetGame()
+    createMenuButton()
+
+}
+
+const createMenuButton = () => {
+
+    const menuButton = document.createElement("p")
+    menuButton.className="menu-button menu-alone"
+    menuButton.innerHTML = "MENU PRINCIPAL"
+    screen.appendChild(menuButton)
+    menuButton.addEventListener("click",showMenu)
+
+}
+
+
+const createRanking = () => {
+    const rankingMenu = document.createElement('div')
+    rankingMenu.className = "rankingMenu"
+       
+    createTableForRanking()
+};
+
+const resetGame = () => {
+    for (let letters in questions){
+        questions[letters].status = 0
+    }
+}
+
+const createReNamePlayerButton = () => {
+    const renamePlayerButton = document.createElement("p")
+    renamePlayerButton.className="menu-button menu-alone"
+    renamePlayerButton.innerHTML = "CAMBIAR NICK"
+    screen.appendChild(renamePlayerButton)
+    renamePlayerButton.addEventListener("click",showUserInput)
+};
+
+const createTableForRanking = () => {
+
+    const table = document.createElement("table")
+    table.className= "rankingTable";
+    screen.appendChild(table)
+
+    for (let users in ranking){
+        const row = document.createElement("tr")
+        row.className= "row";
+
+        for (let values in ranking){
+            const column = document.createElement("td");
+            column.className="column";
+            column.innerHTML= ranking[users][values];
+            row.appendChild(column);
+        };
+
+        table.appendChild(row);
+    };
+};
+
+const startTimers =() => {
+    let counter = 3
+    
+    const countThree = () => screen.innerHTML= `El juego empieza en ${counter--}...`;
+    
+    screen.innerHTML= `Tienes ${countDown} segundos.`
+    timer.innerHTML= userInput.value + " " + countDown
+    setTimeout(countThree,2000);
+    setTimeout(countThree,3000);
+    setTimeout(countThree,4000);
+    setTimeout(createGameInterface,5000);
+};
+  
+const createGameInterface = () => {
+    
+    theQuestion.className = "the-question jugo"
+    theInput.className = "the-input jugo"
+    sendButton.className = "send-Button jugo the-buttons"
+    passapalabraButton.className = "passapalabra-button jugo the-buttons"
+    screen.innerHTML = ""
+    theQuestion.innerHTML = ""
+    sendButton.innerHTML = "ENVIAR"
+    passapalabraButton.innerHTML = "PASAPAL-ISDI"
+  
+    screen.appendChild(theQuestion)
+    screen.appendChild(theInput)
+    screen.appendChild(sendButton)
+    screen.appendChild(passapalabraButton)
+    game()
+}
+  
+const game = () => {
+    questions = questionPack[Math.floor(Math.random() * 3)]
+    activateCounter()
+    round()
+};
+const activateCounter = () =>{
+    actualTime = 0
+    timerGameOver()
+};
+  const timerGameOver = () =>{
+  
+      if(timer.innerHTML === userInput.value + " WORDS OVER"){
+        return;
+      };
+      if (timer.innerHTML === "PASAPAL-ISDI"){
+        return;
+      }
+      if(countDown === -1){
+        endGame("time")
+        return
+      }else{
+        timer.innerHTML=`${userInput.value} ${countDown--}`;
+      };
+      setTimeout(drWhoTravelsInTimeAndSpaceLikeThisFunctionDo,500)
+    }; 
+  const drWhoTravelsInTimeAndSpaceLikeThisFunctionDo = () =>{
+      setTimeout(timerGameOver, 500);
+      actualTime++
+    };
+  const endGame = (reason) =>{
+    rulo = document.querySelectorAll(".circle")
+    for(let each in rulo){
+      if(Number.isInteger(+each)){
+        rulo[each].remove()
+      }
+    }
+    if (reason === "time"){
+      timer.innerHTML = userInput.value + " TIME OVER"
+    }else if( reason === "words"){
+      timer.innerHTML = userInput.value + " WORDS OVER"
+    }else{
+      timer.innerHTML = "PASAPAL-ISDI"
+    };
+    screen.innerHTML= null
+    rankUser() 
+    showRanking()
+    actualLetter = -1
   };
+  
+  const rankUser = () => {
+    let userScore = 0
+
+    for(let letter in questions){
+      if (questions[letter].status === 1){
+        userScore++
+      }else if(questions[letter].status === 2){
+        userScore -= 2
+      };
+    };
+  
+    ranking.push([userInput.value, userScore, actualTime]) 
+  };
+  
+  const round = () => {
+    if(checkWordsLeft()){
+      showQuestion()
+      return;
+    }
+      endGame("words")
+  };
+  const checkWordsLeft = () => {
+    let count = 0
+    for(let letter in questions){
+      if (questions[letter].status === 0){
+        count ++
+      }
+    }
+    if(count === 0){ 
+      return false;
+    }else{
+      return true;
+    }
+  } 
+  const showQuestion = () => {
+    
+    if(actualLetter >= questions.length-1){
+      actualLetter = -1
+    };
+    actualLetter++
+    if(questions[actualLetter].status === 0){
+      theQuestion.innerHTML= `${questions[actualLetter].question}`
+      getUserAnswer()
+    }else{
+      round()
+      return;
+    ;}
+  };
+  const enterKey = (event) =>{
+    event.preventDefault()
+    if (event.code === "Enter"){
+      checkAnswer()
+    };
+  };
+  const spaceKey = (event) =>{
+    event.preventDefault()
+    if(event.code === 'Space'){
+      round()
+    }
+  }
+  const getUserAnswer = () => {
+    sendButton.addEventListener("click",checkAnswer);
+    theInput.addEventListener("keyup", enterKey)
+    passapalabraButton.addEventListener("click",round);
+    theInput.addEventListener("keyup",spaceKey);
+  };
+  const checkAnswer = () => {
+    manageAnswer()
+    clearInput()
+    round()
+  }
+  const manageAnswer = () => {
+    
+    if(cleanString(theInput.value) === questions[actualLetter].answer){
+    questions[actualLetter].status = 1
+    changeLettersColors(" green")
+    }else{
+      questions[actualLetter].status = 2
+      changeLettersColors(" red")
+    };
+  };
+  
+  const clearInput = () => {
+    theInput.value = ""
+  }
+  const changeLettersColors = (color) => {
+    document.querySelector(".circle." + questions[actualLetter].letter.toUpperCase()).className += color;
+  };
+  
+  
+  const cleanString = (string) => {
+    string = string.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu,"");
+    return string;
+  };
+
+showMenu()
+
