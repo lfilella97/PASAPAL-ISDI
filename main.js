@@ -112,7 +112,7 @@ const showRules = () => {
     const rulesContainer = document.createElement("p")
     rulesContainer.className = "rules"
     rulesContainer.innerHTML = (`BIENVENIDO A PASAPAL-ISDI: <br><br> El objetivo principal del juego es adivinar la palabra que<br> se esconde detras de cada definición:
-    <br><br>-Cada acierto sumará un punto.<br>-Cada fallo restara dos puntos.<br>-Puedes pasar a la siguiente palabra sin responder pulsando espacio y dejarla para la segunda vuleta del rosco.<br>-El tiempo maximo de la partida són ${mainCountDown} segundos.`);
+    <br><br>-Cada acierto sumará dos puntos.<br>-Cada fallo restara un punto.<br>-Puedes pasar a la siguiente palabra sin responder pulsando espacio y dejarla para la segunda vuleta del rosco.<br>-El tiempo maximo de la partida són ${mainCountDown} segundos.`);
     screen.appendChild(rulesContainer)
     createMenuButton()
 }
@@ -168,7 +168,7 @@ const createTableForRanking = () => {
         const row = document.createElement("tr")
         row.className= "row";
 
-        for (let values in ranking){
+        for (let values in ranking[0]){
             const column = document.createElement("td");
             column.className="column";
             column.innerHTML= ranking[users][values];
@@ -264,9 +264,9 @@ const activateCounter = () =>{
 
     for(let letter in questions){
       if (questions[letter].status === 1){
-        userScore++
+        userScore += 2
       }else if(questions[letter].status === 2){
-        userScore -= 2
+        userScore --
       };
     };
   
