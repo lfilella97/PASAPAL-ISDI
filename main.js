@@ -232,6 +232,7 @@ const createGameInterface = () => {
     screen.appendChild(theInput)
     screen.appendChild(sendButton)
     screen.appendChild(passapalabraButton)
+    console.log(theInput)
     game()
 }
   
@@ -301,6 +302,7 @@ const activateCounter = () =>{
   const round = () => {
     if(checkWordsLeft()){
       showQuestion()
+      theInput.focus()
       return;
     }
       endGame("words")
