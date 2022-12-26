@@ -1,47 +1,63 @@
 
-import { questionPack, ranking } from "./gameObjects.js"
+import { questionPack, ranking } from "./gameObjects.js";
 
-const mainCountDown = 300
+const mainCountDown = 300;
 let actualTime;
 let questions;
 let rulo;
-let actualLetter = -1
+let actualLetter = -1;
 let countDown;
-const theQuestion = document.createElement("div")
-const userInput = document.createElement("input")
-const screen = document.querySelector(".main-content")
-const timer = document.querySelector(".title-countdown")
-const theInput = document.createElement("input")
-const sendButton = document.createElement("div")
-const passapalabraButton = document.createElement("div")
+const theQuestion = document.createElement("div");
+const userInput = document.createElement("input");
+const screen = document.querySelector(".main-content");
+const timer = document.querySelector(".title-countdown");
+const theInput = document.createElement("input");
+const sendButton = document.createElement("button");
+const passapalabraButton = document.createElement("button");
+
+theInput.addEventListener("keyup", (event) =>{
+  event.preventDefault();
+  if (event.code === "Enter"){
+    checkAnswer();
+  }
+  if(event.code === 'Space'){
+    round();
+  };
+});
 
 
 const showMenu = () => {
 
     countDown = mainCountDown
     timer.innerHTML = "PASAPAL-ISDI"
-    screen.innerHTML=null
+    screen.innerHTML = null
     const menu = document.createElement('ul')
     menu.className = "menu"
     screen.appendChild(menu)
   
   
-    const jugarButton = document.createElement('li')
-    const instruccionesButton = document.createElement("li")
-    const rankingButton = document.createElement("li")
+    const jugarButton = document.createElement('button')
+    const instruccionesButton = document.createElement("button")
+    const rankingButton = document.createElement("button")
     
     jugarButton.classList= "menu-button play"
     instruccionesButton.classList = "menu-button instrucciones"
     rankingButton.classList = "menu-button ranking"
-  
+
+    jugarButton.setAttribute("tabindex",0)
+    instruccionesButton.setAttribute("tabindex",0)
+    rankingButton.setAttribute("tabindex",0)
+
     jugarButton.innerHTML="JUEGO"
     instruccionesButton.innerHTML = "INSTRUCCIONES"
     rankingButton.innerHTML = "RANKING"
-    
+
     menu.appendChild(jugarButton)
     menu.appendChild(instruccionesButton)
     menu.appendChild(rankingButton)
-  
+
+    jugarButton.focus()
+
     jugarButton.addEventListener("click",showUserInput);
     instruccionesButton.addEventListener("click", showRules);
     rankingButton.addEventListener("click",showRanking)
@@ -51,19 +67,27 @@ const showMenu = () => {
 const showUserInput = () => {
     screen.innerHTML= null
     const userDescription = document.createElement("p")
-    
-    const userSumit = document.createElement("p")
-    userDescription.className="rules"
+    const userSumit = document.createElement("button")
+    userDescription.className="rule"
     userInput.className="user-input"
     userSumit.className="menu-button"
     userDescription.innerHTML="Introduce tu usuario"
-    userInput.value=""
+    
   
     userSumit.innerHTML="ACEPTAR"
     screen.appendChild(userDescription)
     screen.appendChild(userInput)
     screen.appendChild(userSumit)
     
+    setTimeout(() => userInput.focus(), 500)
+   
+    userInput.addEventListener("keyup", (event) =>{
+  
+      event.preventDefault()
+      if (event.code === "Enter"){
+        userCheck()
+      };
+    })
     userSumit.addEventListener("click",userCheck)
 }
 
@@ -78,10 +102,11 @@ const userCheck = () => {
 
 const showStartGameButton = () => {
     screen.innerHTML=`Tu nick es: "${userInput.value}"`
-    const startGameButton = document.createElement("p")
+    const startGameButton = document.createElement("button")
     startGameButton.className="menu-button ready"
     startGameButton.innerHTML="JUGAR"
     screen.appendChild(startGameButton)
+    startGameButton.focus()
     startGameButton.addEventListener("click",startGameButtonPress)
     createReNamePlayerButton()
     createMenuButton()
@@ -96,7 +121,7 @@ const startGameButtonPress = () => {
 
 function createRosco() {
     const circleContainer = document.querySelector('.rulo');
-    const abecedario = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+    const abecedario = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     for (let i = 0; i < 26; i++) {
       const element = document.createElement('div');
       if( !(i === 26 )){
@@ -109,10 +134,10 @@ function createRosco() {
 
 const showRules = () => {
     screen.innerHTML= null
-    const rulesContainer = document.createElement("p")
+    const rulesContainer = document.createElement("div")
     rulesContainer.className = "rules"
-    rulesContainer.innerHTML = (`BIENVENIDO A PASAPAL-ISDI: <br><br> El objetivo principal del juego es adivinar la palabra que<br> se esconde detras de cada definición:
-    <br><br>-Cada acierto sumará dos puntos.<br>-Cada fallo restara un punto.<br>-Puedes pasar a la siguiente palabra sin responder pulsando espacio y dejarla para la segunda vuleta del rosco.<br>-El tiempo maximo de la partida són ${mainCountDown} segundos.`);
+    rulesContainer.innerHTML = (`BIENVENIDO A PASAPAL-ISDI: <br><br> El objetivo principal del juego es adivinar la palabra que se esconde detras de cada definición:
+    <br><br>-Cada acierto sumará dos puntos.<br>-Cada fallo restara un punto.<br>-El tiempo maximo de la partida són ${mainCountDown} segundos. <br>-Puedes pasar a la siguiente palabra sin responder pulsando espacio y dejarla para la segunda vuleta del rosco.`);
     screen.appendChild(rulesContainer)
     createMenuButton()
 }
@@ -128,9 +153,9 @@ const showRanking = () => {
 
 const createMenuButton = () => {
 
-    const menuButton = document.createElement("p")
+    const menuButton = document.createElement("button")
     menuButton.className="menu-button menu-alone"
-    menuButton.innerHTML = "MENU PRINCIPAL"
+    menuButton.innerHTML = "MENU"
     screen.appendChild(menuButton)
     menuButton.addEventListener("click",showMenu)
 
@@ -151,9 +176,9 @@ const resetGame = () => {
 }
 
 const createReNamePlayerButton = () => {
-    const renamePlayerButton = document.createElement("p")
+    const renamePlayerButton = document.createElement("button")
     renamePlayerButton.className="menu-button menu-alone"
-    renamePlayerButton.innerHTML = "CAMBIAR NICK"
+    renamePlayerButton.innerHTML = "CAMBIAR USUARIO"
     screen.appendChild(renamePlayerButton)
     renamePlayerButton.addEventListener("click",showUserInput)
 };
@@ -182,10 +207,10 @@ const createTableForRanking = () => {
 const startTimers =() => {
     let counter = 3
     
-    const countThree = () => screen.innerHTML= `El juego empieza en ${counter--}...`;
+    const countThree = () => timer.innerHTML= `Empieza en ${counter--}...`;
     
-    screen.innerHTML= `Tienes ${countDown} segundos.`
-    timer.innerHTML= userInput.value + " " + countDown
+    timer.innerHTML= `Tienes ${countDown} segundos.`
+    screen.innerHTML= null
     setTimeout(countThree,2000);
     setTimeout(countThree,3000);
     setTimeout(countThree,4000);
@@ -307,23 +332,13 @@ const activateCounter = () =>{
       return;
     ;}
   };
-  const enterKey = (event) =>{
-    event.preventDefault()
-    if (event.code === "Enter"){
-      checkAnswer()
-    };
-  };
-  const spaceKey = (event) =>{
-    event.preventDefault()
-    if(event.code === 'Space'){
-      round()
-    }
-  }
+  
+
   const getUserAnswer = () => {
     sendButton.addEventListener("click",checkAnswer);
-    theInput.addEventListener("keyup", enterKey)
+    
     passapalabraButton.addEventListener("click",round);
-    theInput.addEventListener("keyup",spaceKey);
+    
   };
   const checkAnswer = () => {
     manageAnswer()

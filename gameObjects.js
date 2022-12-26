@@ -88,5 +88,5 @@ export const questionPack = [
   
   export const ranking = [
     ["USER", "SCORE", "TIME"],
-    ["Finn_Ming", 20, 120 ],
+    ["Lluis97", 20, 120 ],
   ]
